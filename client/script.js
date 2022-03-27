@@ -1,29 +1,28 @@
 'use strict';
 
-// import {io} from 'socket.io-client'
-const client = require("socket.io-client");
-const host = "http://localhost:3030";
-const socket = client.connect(host);
+import { io } from "socket.io-client";
+
+const socket = io("http://localhost:5050");
 const joinRoomButton = document.getElementById('room-button')
 const messageInput = document.getElementById('message-input')
 const roomInput = document.getElementById('room-input')
 const form = document.getElementById('form')
 
-// const socket = io('http://localhost:3030')
 
-const userSocket = io('http://localhost:3030/user', { auth: { token: 'test' } })
-socket.on('connect', () => {
-    displayMessage( `${socket.id}`)
-})
+
+const userSocket = io('http://localhost:5050/user', { auth: { token: 'I didnt understand' } })
 
 userSocket.on('connect_error', error => {
     displayMessage(error)
 })
 
-socket.on('received-message', message => {
-    displayMessage(message)
+socket.on('connect', () => {
+    displayMessage(`You connected with id ${socket.id}`)
 })
 
+socket.on('receive-message', message => {
+    displayMessage(message)
+})
 
 form.addEventListener('submit', e => {
     e.preventDefault()
@@ -50,3 +49,13 @@ function displayMessage(message) {
     document.getElementById('message-container').append(div)
 }
 
+let count = 0;
+setInterval(() => {
+    socket.emit('ping', ++count)
+}, 1000)
+document.addEventListener('keydown', e => {
+    if (e.target.matches('input')) return
+    if (e.key === 'c') socket.connect()
+    if (e.key === 'd') socket.disconnect()
+
+})
