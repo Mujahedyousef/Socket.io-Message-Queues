@@ -59,4 +59,4 @@ and using setInterval to count.
 
 |name |Link|
 |----|----|
-|PR|https://github.com/Mujahedyousef/Socket.io-Message-Queues/pull/2|
+|PR|[PR](https://github.com/Mujahedyousef/Socket.io-Message-Queues/pull/2)|
