@@ -24,7 +24,7 @@ and connect with cors and admin socket.
 * Connection server on a space name.
 * Listen to the event to connection on this endpoint.
 * Create middleware for a check from token if found.  
-[Server file](/sever/sever.js)
+[Server file](https://github.com/Mujahedyousef/Socket.io-Message-Queues/blob/main/server/server.js)
 
 3. Script file
 
